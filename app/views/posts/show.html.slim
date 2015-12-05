@@ -1,0 +1,61 @@
+- model_class = Post
+
+.post
+  h1.post-title
+    = link_to @post.title, post_path(@post)
+  .post-image
+    = image_tag @post.image.url(:medium)
+  .post-body
+    / = h(@post.body).gsub(/\n/, '<br/>')
+    = simple_format(@post.body)
+    div.text-center
+      br
+      .post-status.pull-left
+        => fa_icon "user"
+        | Author:
+        a<[href="#{user_feed_path(@post.user.id)}"]
+          - if @post.user.fname.blank? && @post.user.lname.blank?
+            = @post.user.email
+          - else
+            => @post.user.fname
+            = @post.user.lname
+      strong
+        | *****
+      .post-status.pull-right
+        => fa_icon "eye"
+        = @post.views
+  hr.colorgraph
+
+h3
+  | Comments:
+
+- if @comments.blank?
+  p
+    | There is no comments
+
+.comments.container-fluid
+  - @comments.each do |comment|
+    = render comment
+
+br
+
+- if current_user
+  = form_for(@post.comments.new, remote: true) do |f|
+
+    = f.hidden_field :post_id, :value => @post.id
+    = f.hidden_field :user_id, :value => current_user.id
+
+    .form-group
+      = f.text_area :text, id: "comment-input-field", class: "form-control", style: "resize: vertical", placeholder: "Comment body here.."
+
+    .actions
+      = f.submit "Comment", class: "btn btn-success"
+
+br
+= link_to t('.back', :default => t("helpers.links.back")), feed_path, :class => 'btn btn-default'
+
+- if current_user && current_user.id == @post.user_id
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_post_path(@post), :class => 'btn btn-default'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), post_path(@post), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -1,0 +1,29 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment {
+  margin-bottom: 10px;
+
+  .comment-avatar {
+    img {
+      border-radius: 3px;
+      max-width: 70px;
+      min-width: 55px;
+    }
+  }
+
+  .comment-body {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+
+    .comment-delete {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+    }
+
+  }
+}

@@ -1,0 +1,21 @@
+- content_for :title, "Feed"
+- model_class = Post
+.posts
+  - if @posts.blank?
+    | There are no posts yet.
+  - @posts.each do |post|
+    .post
+      h1.post-title
+        = link_to post.title, post_path(post)
+      .post-image
+        = image_tag post.image.url(:medium)
+      .post-body
+        - body = post.body.split(/\s+/, 46)[0...45].join(' ')
+        = body
+        -if body.length < post.body.length
+          | ...
+      .post-status.pull-right
+          => fa_icon "eye"
+          = post.views
+
+      hr.colorgraph

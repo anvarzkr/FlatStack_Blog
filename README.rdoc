@@ -1,0 +1,17 @@
+== README
+
+FlatStack Blog Homework
+
+* Users can login with Email or username
+
+* /feed - all posts.
+
+* /feed/:user_id - all posts of exact user.
+
+* /feed or /feed/:user_id - redirect to login if guest.
+
+* Users can upload avatar if they want. They will have default avatar in other way.
+
+* If users dont want to show their name in comments/post-author section - there will be displayed their Email.
+
+* You can navigate to user's posts page just by clicking on their name/email on comments/post-author section.

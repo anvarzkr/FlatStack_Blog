@@ -1,0 +1,19 @@
+.comment.row data-id=comment.id
+  .comment-avatar.col-xs-2.col-sm-2.col-md-2.col-lg-2.text-right
+    = image_tag comment.user.avatar.url(:thumb), width: "90%"
+  .comment-body.col-xs-10.col-sm-10.col-md-10.col-lg-10
+    - if current_user && current_user.id == comment.user.id
+      .comment-delete
+        = link_to comment, method: :delete, remote: true
+          = fa_icon "times"
+    .comment-user
+      a[href="#{user_feed_path(comment.user.id)}"]
+        strong
+          - if comment.user.fname.blank? && comment.user.lname.blank?
+            = comment.user.email
+          - else
+            => comment.user.fname
+            = comment.user.lname
+    .comment-text
+    = comment.text
+
