@@ -8,7 +8,7 @@ FlatStack Blog Homework
 
 * /feed/:user_id - all posts of exact user.
 
-* USERNAME.*.*/ - by this path (e.g.:anvarzkr.blog.ru) you can access user's feed who has USERNAME as his username.
+* USERNAME.DOMAIN.X/ - by this path (e.g.:anvarzkr.blog.ru) you can access user's feed who has USERNAME as his username.
 
 * /feed or /feed/:user_id - redirect to login if guest.
 
