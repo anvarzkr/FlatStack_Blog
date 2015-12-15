@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get '/feed' => 'posts#feed', as: :feed
   get '/feed/:user_id' => 'posts#user_feed', as: :user_feed
+  # get '/blog/:username' => 'posts#user_blog', as: :user_blog
+  match '/', to: 'posts#user_blog', constraints: { subdomain: /.+/ }, via: [:get, :post, :put, :patch, :delete]
 
   constraints subdomain: 'admin' do
     resources :comments

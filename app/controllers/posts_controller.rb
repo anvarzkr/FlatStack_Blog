@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show, :feed, :user_feed, :user_blog]
 
   # GET /posts
   # GET /posts.json
@@ -19,7 +19,10 @@ class PostsController < ApplicationController
   end
 
   def user_blog
-
+    @user = User.where(username: request.subdomain).first
+    @posts = @user ? @user.posts : Post.all
+    logger.debug request.subdomain
+    render(:feed)
   end
 
   # GET /posts/1
